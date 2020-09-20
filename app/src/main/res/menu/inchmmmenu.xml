@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/menusearch"
+          android:icon="@drawable/ic_search_white_24dp"
+          app:showAsAction="always|collapseActionView"
+          android:title="Search"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"/>
+
+    <item android:id="@+id/sort"
+          app:showAsAction="ifRoom"
+          android:icon="@drawable/ic_sort_white_24dp"
+          android:title="Sort"/>
+    <item android:id="@+id/mconveter"
+            android:title="Converter"
+            app:showAsAction="ifRoom"
+            android:icon="@drawable/ic_coverter_white_24dp"/>
+    <item android:id="@+id/openpdf"
+        android:title="Open PDF"/>
+    <!--<item android:id="@+id/namellist"
+        android:title="Name List"/>-->
+    <item android:id="@+id/printpdf"
+        android:title="Print PDF"/>
+   <!-- <item android:id="@+id/backupmenu"
+        android:title="Backup/Restore">
+
+        <menu>
+            <item
+                    android:id="@+id/action_backup"
+                    android:orderInCategory="100"
+                    android:title="@string/action_backup"
+                    app:showAsAction="never" />
+
+            <item
+                    android:id="@+id/action_import"
+                    android:orderInCategory="100"
+                    android:title="@string/action_import"
+                    app:showAsAction="never" />
+
+           &lt;!&ndash; <item
+                    android:id="@+id/action_backup_Drive"
+                    android:orderInCategory="100"
+                    android:title="@string/action_backup_drive"
+                    app:showAsAction="never" />
+
+            <item
+                    android:id="@+id/action_import_Drive"
+                    android:orderInCategory="100"
+                    android:title="@string/action_import_drive"
+                    app:showAsAction="never" />&ndash;&gt;
+
+          &lt;!&ndash;  <item
+                    android:id="@+id/action_delete_all"
+                    android:orderInCategory="100"
+                    android:title="@string/action_clear_data"
+                    app:showAsAction="never" />&ndash;&gt;
+        </menu>
+    </item>-->
+
+
+</menu>

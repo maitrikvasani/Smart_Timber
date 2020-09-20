@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="maitrik.smarttimber">
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/stlogofinal"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/stlogofinal"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".Cut_Size.ActSavedCutSize"></activity>
+        <activity
+            android:name=".Cut_Size.ActCutSizeCFT"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".Test.ActKeyBoardTest"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity android:name=".CustomKeyboard" />
+        <activity android:name=".Lagging.LaggingCFT" />
+        <activity
+            android:name=".Cut_Size.CutSizeHome"
+            android:label="Cut Size CFT"
+            android:parentActivityName=".STHome" />
+        <activity
+            android:name=".Cut_Size.cutsize_list"
+            android:parentActivityName=".Cut_Size.CutSizeList" />
+        <activity
+            android:name=".Cut_Size.CutSizeList"
+            android:label="View Saved Data"
+            android:parentActivityName=".Cut_Size.CutSizeHome" />
+        <activity android:name=".Cut_Size.fourbythree" />
+        <activity
+            android:name=".Cut_Size.CutSizeCFT"
+            android:label="Cut Size CFT"
+            android:parentActivityName=".Cut_Size.CutSizeHome"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
+        <activity
+            android:name=".Round_Log.Roundlogcft"
+            android:label="Round Log CFT"
+            android:parentActivityName=".STHome" />
+        <activity
+            android:name=".Drum.Drum_List"
+            android:label="@string/viewsavedata" />
+        <activity
+            android:name=".Drum.Backup_Restore"
+            android:label="@string/backup_restore"
+            android:parentActivityName=".STHome" />
+        <activity
+            android:name=".Drum.About_Us"
+            android:label="About Drum CFT"
+            android:parentActivityName=".Drum.Home" />
+        <activity
+            android:name=".Drum.Drum_Order"
+            android:label="Create Order"
+            android:parentActivityName=".Drum.Home" />
+        <activity
+            android:name=".Drum.Converter_INCHMM"
+            android:label="Converter"
+            android:parentActivityName=".Drum.Home" />
+        <activity
+            android:name=".Drum.Wooden_Drum_INCH"
+            android:label="@string/inch"
+            android:parentActivityName=".Drum.Home" />
+        <activity
+            android:name=".Drum.Wooden_Drum_MM"
+            android:label="@string/mm"
+            android:parentActivityName=".Drum.Home" />
+        <activity
+            android:name=".Splash"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".STHome" />
+        <activity
+            android:name=".Drum.Home"
+            android:label="Drum CFT"
+            android:parentActivityName=".STHome" />
+        <activity android:name=".MainActivity" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+    </application>
+
+</manifest>

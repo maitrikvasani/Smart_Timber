@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:weightSum="100"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".Drum.Drum_List">
+
+    <androidx.cardview.widget.CardView android:layout_width="match_parent"
+        android:layout_margin="1dp"
+        app:cardCornerRadius="3dp"
+        android:layout_gravity="center"
+        app:cardUseCompatPadding="true"
+        android:layout_height="wrap_content">
+        <LinearLayout android:layout_width="match_parent"
+            android:layout_marginStart="2dp"
+            android:weightSum="100"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <EditText android:layout_width="0dp"
+                android:focusable="false"
+                android:editable="false"
+                android:hint="Select Date"
+                android:id="@+id/drumlistdate1"
+                android:drawableEnd="@drawable/ic_date_range_black_24dp"
+                android:layout_weight="42"
+                android:layout_height="wrap_content"/>
+            <EditText android:layout_width="0dp"
+                android:focusable="false"
+                android:editable="false"
+                android:id="@+id/drumlistdate2"
+                android:hint="Select Date"
+                android:drawableEnd="@drawable/ic_date_range_black_24dp"
+                android:layout_weight="42"
+                android:layout_height="wrap_content"/>
+            <ImageView android:layout_width="0dp"
+                android:layout_weight="8"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_done_black_24dp"
+                android:id="@+id/btndateok"/>
+            <ImageView android:layout_width="0dp"
+                android:layout_weight="8"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_clear_red_24dp"
+                android:id="@+id/btndateclr"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+    <EditText android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Search name.."
+        android:visibility="gone"
+        android:layout_marginStart="3dp"
+        android:layout_marginEnd="3dp"
+        android:drawableEnd="@drawable/ic_search_black_24dp"
+        android:id="@+id/etsearchname" android:inputType=""/>
+    <ListView
+        android:id="@+id/lstviewdrum"
+        android:layout_weight="90"
+        android:divider="@null"
+        android:saveEnabled="true"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"/>
+    <View android:layout_width="match_parent"
+        android:layout_margin="1dp"
+        android:layout_height="1dp" android:background="@color/colorPrimary"/>
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:layout_weight="10">
+        <androidx.cardview.widget.CardView android:layout_width="match_parent"
+            android:layout_margin="1dp"
+            app:cardCornerRadius="3dp"
+            android:layout_gravity="center"
+            app:cardUseCompatPadding="true"
+            android:layout_height="match_parent">
+            <LinearLayout android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+                <LinearLayout android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="100"
+                    android:orientation="horizontal">
+                    <LinearLayout android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="50"
+                        android:orientation="horizontal">
+                        <TextView android:layout_width="wrap_content"
+                            android:text="Total Record: "
+                            android:gravity="end"
+                            android:layout_marginStart="5dp"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:layout_height="wrap_content"/>
+                        <TextView android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textStyle="bold"
+                            android:id="@+id/lstviewdrumtotalrecord"/>
+                    </LinearLayout>
+                    <LinearLayout android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="50"
+                        android:orientation="horizontal">
+                        <TextView android:layout_width="wrap_content"
+                            android:text="Total Chakkar: "
+                            android:gravity="end"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:layout_height="wrap_content"/>
+                        <TextView android:layout_width="wrap_content"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:id="@+id/lstviewdrumtotalchakar"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="100"
+                    android:orientation="horizontal" android:baselineAligned="false">
+                    <LinearLayout android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_weight="50">
+                        <TextView android:layout_width="wrap_content"
+                            android:text="Total CFT     : "
+                            android:layout_marginStart="5dp"
+                            android:gravity="end"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:layout_height="wrap_content"/>
+                        <TextView android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:id="@+id/lstviewdrumtotalcft"/>
+                    </LinearLayout>
+                    <LinearLayout android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="50"
+                        android:orientation="horizontal">
+                        <TextView android:layout_width="wrap_content"
+                            android:text="Total Amount: "
+                            android:gravity="end"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:layout_height="wrap_content"/>
+                        <TextView android:layout_width="wrap_content"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:id="@+id/lstviewdrumtotalamnt"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+    <EditText android:layout_width="wrap_content"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:id="@+id/totalcft"/>
+    <Button android:layout_width="match_parent"
+        android:id="@+id/btnfilter"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:text="Filter by date"/>
+</LinearLayout>

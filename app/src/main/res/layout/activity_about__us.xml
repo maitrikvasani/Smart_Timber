@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content" android:isScrollContainer="true">
+        <LinearLayout android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="vertical">
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="#ffffff"
+                app:cardElevation="3dp"
+                app:cardCornerRadius="3dp"
+                app:cardUseCompatPadding="true">
+                <LinearLayout android:layout_width="match_parent"
+                    android:layout_margin="10dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="15sp"
+                        android:text="WOODEN DRUM CFT Provides fastest way of calculation of Wooden Drum in Cubic Feet."/>
+                    <View android:layout_width="match_parent" android:layout_height="1dp"
+                        android:background="@color/colorPrimary"/>
+                    <TextView android:layout_width="wrap_content"
+                        android:textSize="15sp"
+                        android:layout_height="wrap_content"
+                        android:text="This application is developed under the vision of calculation Wooden Drum CFT in Wooden Industries."/>
+                    <View android:layout_width="match_parent" android:layout_height="1dp"
+                        android:background="@color/colorPrimary"/>
+                    <TextView android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:text="In this application you can calculate Wooden Drum CFT and also save the Record."/>
+                    <View android:layout_width="match_parent" android:layout_height="1dp"
+                        android:background="@color/colorPrimary"/>
+                    <TextView android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:text="You can search Record Ex. Party name,Date etc.."/>
+                    <View android:layout_width="match_parent" android:layout_height="1dp"
+                        android:background="@color/colorPrimary"/>
+                    <TextView android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:text="You can search Record particular Date wise..."/>
+                    <View android:layout_width="match_parent" android:layout_height="1dp"
+                        android:background="@color/colorPrimary"/>
+                    <TextView android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:text="You can Sort Saved Record by...    \n Chalan no 1 to 10 \n Chalan no 10 to 1 \n Date (Oldest) \n Date (Latest) \n Name (Ascending) A to Z \n Name (Descending) Z to A"/>
+                    <View android:layout_width="match_parent" android:layout_height="1dp"
+                        android:background="@color/colorPrimary"/>
+                    <TextView android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:text="You can Convert measure in INCH to MM and MM to INCH"/>
+
+                    <View android:layout_width="match_parent" android:layout_height="1dp"
+                        android:background="@color/colorPrimary"/>
+                    <TextView android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:text="It's Provides Share data to other application.
+                          \nYou can also create also backup and restore in this application.\n
+You can generate report of saved data date wise and  also you can print report."/>
+                    <View android:layout_width="match_parent" android:layout_height="1dp"
+                        android:background="@color/colorPrimary"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="#ffffff"
+                app:cardElevation="3dp"
+                android:visibility="gone"
+                app:cardCornerRadius="3dp"
+                app:cardUseCompatPadding="true">
+                <LinearLayout android:layout_width="match_parent"
+                    android:layout_margin="10dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView android:layout_width="wrap_content"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:layout_height="wrap_content"
+                            android:text="Developed By: "/>
+                        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                            android:textSize="18sp"
+                            android:textColor="@color/colorAccent"
+                            android:textStyle="bold"
+                            android:text="Maitrik Hareshbhai Vasani"/>
+                    </LinearLayout>
+                    <LinearLayout android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView android:layout_width="wrap_content"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:layout_height="wrap_content"
+                            android:text="Published By:  "/>
+                        <TextView android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="18sp"
+                            android:textColor="@color/colorAccent"
+                            android:textStyle="bold"
+                            android:text="NEW SHYAM TIMBERS , NADIAD"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

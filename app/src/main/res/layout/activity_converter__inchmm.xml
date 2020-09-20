@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Drum.Converter_INCHMM">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:padding="5dp"
+        android:layout_height="match_parent">
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="Convert INCH to MM and MM to INCH"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="15sp"/>
+        <View android:layout_width="match_parent" android:layout_height="1dp"
+            android:background="@color/colorPrimary"></View>
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="100">
+            <EditText android:layout_width="0dp"
+                android:layout_weight="35"
+                android:imeOptions="actionGo"
+                android:inputType="numberDecimal"
+                android:layout_height="wrap_content"
+                android:hint="Enter value "
+                android:id="@+id/etvalue"/>
+            <Spinner android:layout_width="0dp"
+                android:layout_weight="30"
+                android:id="@+id/spinchmm"
+                android:layout_height="wrap_content"/>
+            <EditText android:layout_width="0dp"
+                android:layout_weight="35"
+                android:editable="false"
+                android:hint="0000"
+                android:focusable="false"
+                android:id="@+id/etvalue2"
+                android:layout_height="wrap_content"
+                />
+        </LinearLayout>
+        <Button android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Convert"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:padding="10dp"
+            android:background="@drawable/button_shape"
+            android:backgroundTint="@color/colorPrimary"
+            android:drawableStart="@drawable/ic_coverter_white_24dp"
+            android:drawableEnd="@drawable/ic_coverter_white_24dp"
+            android:id="@+id/btncovert"/>
+    </LinearLayout>
+
+</RelativeLayout>

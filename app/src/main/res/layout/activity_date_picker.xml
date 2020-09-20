@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp"
+        tools:context=".Drum.DatePicker">
+
+    <AutoCompleteTextView
+            android:id="@+id/etdname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:completionThreshold="1"
+            android:inputType="text"
+            android:drawableEnd="@drawable/ic_person_black_24dp"
+            android:hint="Enter the name"
+            android:imeOptions="actionNext"
+            android:selectAllOnFocus="true"/>
+
+    <EditText
+            android:id="@+id/etddate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/ic_date_range_black_24dp"
+            android:editable="false"
+            android:focusable="false"
+            android:hint="Select Date" />
+
+    <EditText
+            android:id="@+id/etcno"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/ic_book_black_24dp"
+            android:hint="@string/challan_no"
+            android:inputType="number" />
+
+    <AutoCompleteTextView
+            android:id="@+id/etvno"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/ic_airport_shuttle_black_24dp"
+            android:hint="GJ00XX0000"
+            android:completionThreshold="1"
+            android:inputType="textCapCharacters"
+            android:textAllCaps="true" />
+</LinearLayout>

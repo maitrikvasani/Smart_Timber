@@ -1,0 +1,87 @@
+<resources>
+    <string name="app_name">Smart Timber</string>
+    <string name="sent_to">Choose an any app..</string>
+    <string name="wdc_full">SMART TIMBER</string>
+    <string name="powered_by">Powered by the NEW SHYAM TIMBERS</string>
+    <string name="fmm">Drum in MM CFT</string>
+    <string name="finch">Drum in INCH CFT</string>
+    <string name="inch">INCH</string>
+    <string name="mm">MM</string>
+    <string name="converter">CONVERTER</string>
+    <string name="viewsavedata">View Saved Data</string>
+    <string name="addparty">ADD PARTY</string>
+    <string name="create_order">CREATE ORDER</string>
+    <string name="about_us">ABOUT Drum CFT</string>
+    <string name="challan_no">Challan no</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_add_student">AddStudent</string>
+    <string name="title_activity_add_exam">AddExam</string>
+    <string name="action_backup">Backup</string>
+    <string name="action_backup_drive">Backup to Drive</string>
+    <string name="action_import">Import</string>
+    <string name="action_import_drive">Import from Drive</string>
+    <string name="action_clear_data">Clear All Data</string>
+    <string name="backup_restore">BackUp / Restore</string>
+    <string name="chakkri">Chakkri</string>
+    <string name="Chakkar">Chakkar</string>
+    <string name="mcd">MCD</string>
+    <string name="sigmet">Sigmet</string>
+    <string name="width">
+        <font size="13">WIDTH</font>
+    </string>
+    <string name="height">
+        <font size="13">HEIGHT</font>
+    </string>
+    <string name="length">
+        <font size="13">LENGTH</font>
+    </string>
+    <string name="qty">
+        <font size="13">QTY</font>
+    </string>
+    <string name="hinch">
+        <font size="13">INCH</font>
+    </string>
+    <string name="hmm">
+        <font size="13">MM</font>
+    </string>
+    <string name="save">Save</string>
+    <string name="cft">CFT</string>
+    <string name="custom_keyboard">Custom Keyboard</string>
+
+
+    <string name="systemKeyboardLabel">System Keyboards</string>
+    <string name="systemNumber">System Number Keyboard</string>
+    <string name="systemNumberDecimal">System Number Decimal Keyboard</string>
+    <string name="systemQwerty">System QWERTY Keyboard</string>
+
+    <string name="customKeyboardLabel">Custom Keyboards</string>
+    <string name="customKeyboardAndFieldsLabel">Custom Keyboards and Fields</string>
+    <string name="customNumber">Custom Number Keyboard</string>
+    <string name="customNumberDecimal">Custom Number Decimal Keyboard</string>
+    <string name="customQwerty">Custom QWERTY Keyboard</string>
+
+    <string name="toMainButtonText">Switch to main activity</string>
+    <string name="toAdvancedButtonText">Switch to advanced features activity</string>
+
+
+    <string name="str1">1</string>
+    <string name="str2">2</string>
+    <string name="str3">3</string>
+    <string name="str4">4</string>
+    <string name="str5">5</string>
+    <string name="str6">6</string>
+    <string name="str7">7</string>
+    <string name="str8">8</string>
+    <string name="str9">9</string>
+    <string name="str0">0</string>
+    <string name="str00">00</string>
+    <string name="strPoint">.</string>
+    <string name="strPA">|</string>
+    <string name="strHalf">||</string>
+    <string name="strPona">|||</string>
+    <string name="strEqual">=</string>
+    <string name="strNext">Next</string>
+    <string name="strBackspace">⌫</string>
+
+
+</resources>
