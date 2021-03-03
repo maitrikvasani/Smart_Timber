@@ -9,11 +9,11 @@
         android:id="@+id/row_child_saveCFT_tvLength"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textColor="@color/clrBlack"/>
 
     <View
-        android:layout_width="10dp"
+        android:layout_width="8dp"
         android:layout_height="1dp"
         android:layout_marginStart="5dp"
         android:layout_marginEnd="5dp"
@@ -23,6 +23,6 @@
         android:id="@+id/row_child_saveCFT_tvQTY"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textColor="@color/clrBlack"/>
 </LinearLayout>

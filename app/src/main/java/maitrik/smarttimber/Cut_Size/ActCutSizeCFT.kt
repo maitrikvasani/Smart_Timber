@@ -52,6 +52,7 @@ class ActCutSizeCFT : AppCompatActivity() {
     lateinit var etRate : EditText
     lateinit var tvAmount : TextView
     lateinit var ivAdd : ImageView
+    lateinit var tvEqual : TextView
     var arrItems = ArrayList<CutSize>()
     var TAG = "CUTSIZE"
     var LENGTHDIF = "LENGTHDIFFERENCE"
@@ -122,22 +123,22 @@ class ActCutSizeCFT : AppCompatActivity() {
 
         })
 
-        etRate.addTextChangedListener(object : TextWatcher{
-            override fun afterTextChanged(p0: Editable?) {
-                if (p0!!.isNotEmpty()){
-                    tvAmount.text = getTotalAmount(tvCFT.text.toString().toDouble(),p0.toString().toInt()).toString()
-                }
-            }
-
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
-
-        })
+//        etRate.addTextChangedListener(object : TextWatcher{
+//            override fun afterTextChanged(p0: Editable?) {
+//                if (p0!!.isNotEmpty()){
+//                    tvAmount.text = getTotalAmount(tvCFT.text.toString().toDouble(),p0.toString().toInt()).toString()
+//                }
+//            }
+//
+//            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+//
+//            }
+//
+//            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+//
+//            }
+//
+//        })
     }
 
     private fun editList(p0: CharSequence, type: String) {
@@ -219,6 +220,7 @@ class ActCutSizeCFT : AppCompatActivity() {
         tvAmount = findViewById(R.id.cutSize_tvAmount)
         keyboard = findViewById(R.id.cutSize_customKeyboardView)
         ivAdd = findViewById(R.id.cutSize_ivAdd)
+        tvEqual = findViewById(R.id.cutSize_tvEqual)
 
 
 
@@ -311,6 +313,13 @@ class ActCutSizeCFT : AppCompatActivity() {
         ivAdd.setOnClickListener {
             val intent = Intent(this,ActSavedCutSize::class.java)
             intent.putExtra("SAVE",arrItems)
+            startActivity(intent)
+        }
+
+        tvEqual.setOnClickListener {
+            if (etRate.text.isNotEmpty()){
+            tvAmount.text = getTotalAmount(tvCFT.text.toString().toDouble(),etRate.text.toString().toDouble()).toString()
+            }
         }
     }
 
@@ -372,12 +381,12 @@ class ActCutSizeCFT : AppCompatActivity() {
         tvCMT.text = fm
         tvNOS.text = nos.toString()
         if (etRate.text.isNotEmpty()) {
-            tvAmount.text = getTotalAmount(cft, etRate.text.toString().toInt())
+            tvAmount.text = getTotalAmount(cft, etRate.text.toString().toDouble())
         }
 //        tvAmount.text = fm
     }
 
-    fun getTotalAmount(cft:Double,rate:Int):String{
+    fun getTotalAmount(cft:Double,rate:Double):String{
         val formate = DecimalFormat("##,##,###")
         val amount = cft*rate
         return formate.format(amount)
@@ -441,7 +450,7 @@ class ActCutSizeCFT : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item!!.itemId) {
             R.id.cssave -> {
 //                savedialog()

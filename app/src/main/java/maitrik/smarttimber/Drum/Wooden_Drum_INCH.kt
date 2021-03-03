@@ -784,8 +784,8 @@ class Wooden_Drum_INCH : AppCompatActivity() {
     }
 
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item!!.itemId) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
             R.id.share -> {
                 btninchgcft.performClick()
                 shareDrumDetials(

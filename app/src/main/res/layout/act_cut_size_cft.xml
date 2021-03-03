@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@null"
-                android:gravity="start"
+                android:gravity="center"
                 android:hint="Width"
                 android:textSize="20sp"
                 android:imeOptions="actionNext"
@@ -71,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@null"
-                android:gravity="end"
+                android:gravity="center"
                 android:hint="Height"
                 android:textSize="20sp"
                 android:imeOptions="actionNext"
@@ -175,13 +175,14 @@
                 android:layout_weight="1"
                 android:background="@null"
                 android:hint="Length"
+                android:gravity="center"
                 android:textSize="20sp"
                 android:imeOptions="actionNext"
                 android:inputType="numberDecimal"
                 android:selectAllOnFocus="true" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="24dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
@@ -196,6 +197,7 @@
                 android:layout_weight="1"
                 android:background="@null"
                 android:hint="Qty"
+                android:gravity="center"
                 android:textSize="20sp"
                 android:imeActionLabel="Add"
                 android:inputType="number"
@@ -308,6 +310,7 @@
                 android:weightSum="100">
 
                 <LinearLayout
+                    android:gravity="center_vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -349,6 +352,16 @@
                         android:layout_marginStart="2dp"
                         android:layout_marginEnd="2dp"
                         android:hint="Rate"/>
+                    <TextView
+                        android:id="@+id/cutSize_tvEqual"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="30sp"
+                        android:text="="
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorPrimaryDark"/>
                     <TextView
                         android:id="@+id/cutSize_tvAmount"
                         android:layout_width="wrap_content"

@@ -68,7 +68,7 @@ class PdfDocumentAdapter(context:Context,path:String): PrintDocumentAdapter() {
         catch (e:Exception)
         {
             callback!!.onWriteFailed(e.message)
-            Log.e("WDC",e.message)
+            e.message?.let { Log.e("WDC", it) }
             e.printStackTrace()
         }
         finally {
