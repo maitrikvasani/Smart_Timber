@@ -11,14 +11,17 @@ class CutSizeHome : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cust_size_home)
-        btn_csh_cft.setOnClickListener{
-            startActivity(Intent(this@CutSizeHome,CutSizeCFT::class.java))
-        }
+//        btn_csh_cft.setOnClickListener{
+//            startActivity(Intent(this@CutSizeHome,CutSizeCFT::class.java))
+//        }
         btn_csh_viewalldata.setOnClickListener{
             startActivity(Intent(this@CutSizeHome,CutSizeList::class.java))
         }
         homeCutSize_btnCFT.setOnClickListener {
-            startActivity(Intent(this,ActCutSizeCFT::class.java))
+            val intent = Intent(applicationContext,ActCutSizeCFT::class.java)
+            intent.putExtra("MasterId",-1)
+            startActivity(intent)
+//            startActivity(Intent(this,ActCutSizeCFT::class.java))
         }
     }
 }

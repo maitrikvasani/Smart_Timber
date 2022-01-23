@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
 import android.widget.Toast
+import maitrik.smarttimber.Cut_Size.App
 import maitrik.smarttimber.Model.Drum
 import java.io.File
 import java.io.FileInputStream
@@ -16,6 +17,7 @@ val DATABASE_NAME = "ST"
 val DATABASE_VERSION= 1
 val TABLE_NAME = "TBL_Drum"
 val TABLEMASTER_CUTSIZE ="TBLMASTER_CUTSIZE"
+val TABLEMASTER_CUTSIZE_ITEMS ="TBLMASTER_CUTSIZE_ITEMS"
 val TABLE_CUTSIZE ="TBL_CUTSIZE"
 val TABLE_RLOG = "TBL_ROUNDLOG"
 val COL_ID = "id"
@@ -57,6 +59,7 @@ var COL_DATE="col_date"
 var TBL_Date="tbl_date"
 var COL_CSM_ID ="id"
 var COL_CSM_NAME ="name"
+var COL_CS_SUBITEM_ID ="subid"
 var COL_CS_ID ="cid"
 var COL_CS_W ="WIDTH"
 var COL_CS_H ="HEIGHT"
@@ -77,9 +80,14 @@ class DBHandler(var context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
                 "$COL_DATEDAY INTEGER DEFAULT 0, $COL_DATEMOUNTH INTEGER DEFAULT 0, $COL_DATEYEAR INTEGER DEFAULT 0, $COL_DATE DATE, $COL_INCHMM TEXT NULL, $COL_NAME TEXT NULL," +
                 "$COL_CNO INTEGER DEFAULT 0, $COL_VNO TEXT NULL)")
 
-        db?.execSQL("CREATE TABLE $TABLEMASTER_CUTSIZE ($COL_CSM_ID INTEGER PRIMARY KEY AUTOINCREMENT , $COL_CSM_NAME TEXT NULL)")
+        db?.execSQL("CREATE TABLE $TABLEMASTER_CUTSIZE ($COL_CSM_ID INTEGER PRIMARY KEY AUTOINCREMENT , $COL_CSM_NAME TEXT NULL,$COL_DATE TEXT NULL)")
+        db?.execSQL("CREATE TABLE $TABLEMASTER_CUTSIZE_ITEMS ($COL_CS_SUBITEM_ID INTEGER PRIMARY KEY AUTOINCREMENT , $COL_RATE DOUBLE DEFAULT 0," +
+                "$COL_AMNT DOUBLE DEFAULT 0,$COL_CS_W DOUBLE DEFAULT 0, $COL_CS_H DOUBLE DEFAULT 0 ,$COL_CSM_ID INTEGER," +
+                " FOREIGN KEY ($COL_CSM_ID) REFERENCES $TABLEMASTER_CUTSIZE ($COL_CSM_ID))")
         db?.execSQL("CREATE TABLE $TABLE_CUTSIZE ($COL_CS_ID INTEGER PRIMARY KEY AUTOINCREMENT, $COL_CS_W DOUBLE DEFAULT 0, $COL_CS_H DOUBLE DEFAULT 0 ,$COL_CS_L DOUBLE DEFAULT 0," +
-                " $COL_CS_Q DOUBLE DEFAULT 0 , $COL_CS_CFT DOUBLE DEFAULT 0 , $COL_CSM_ID INTEGER, FOREIGN KEY ($COL_CSM_ID) REFERENCES $TABLEMASTER_CUTSIZE ($COL_CSM_ID))")
+                " $COL_CS_Q DOUBLE DEFAULT 0 , $COL_CS_CFT DOUBLE DEFAULT 0 , $COL_CSM_ID INTEGER,$COL_CS_SUBITEM_ID INTEGER, " +
+                "FOREIGN KEY ($COL_CSM_ID) REFERENCES $TABLEMASTER_CUTSIZE ($COL_CSM_ID)," +
+                "FOREIGN KEY ($COL_CS_SUBITEM_ID) REFERENCES $TABLEMASTER_CUTSIZE_ITEMS ($COL_CS_SUBITEM_ID))")
     }
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         db?.execSQL("DROP TABLE IF EXISTS $TABLE_NAME")
@@ -124,7 +132,7 @@ class DBHandler(var context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
                 Toast.makeText(context,"Error!!!",Toast.LENGTH_SHORT).show()
             }
             else{
-                Toast.makeText(context,"Success..",Toast.LENGTH_SHORT).show()
+//                Toast.makeText(context,"Success..",Toast.LENGTH_SHORT).show()
             }
         } catch (e:Exception)
         {
@@ -132,15 +140,45 @@ class DBHandler(var context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
             Log.e(ContentValues.TAG,"Insert Error!!1")
         }
     }
+    fun insertCutSizeMasterItems(mid:Int,rate:Double,csSubModel: CutSizeSubItemModel)
+    {
+        App.showLog("DB","Id : $mid && rate : $rate")
+        val db = this.writableDatabase
+        val cv = ContentValues()
+        cv.put(COL_CSM_ID,mid)
+        cv.put(COL_RATE,rate)
+        cv.put(COL_CS_H,csSubModel.height)
+        cv.put(COL_CS_W,csSubModel.width)
+        var r: Int
+        try {
+            r = db.insert(TABLEMASTER_CUTSIZE_ITEMS, null, cv).toInt()
+          //  r1 = db.insert(TABLE_CUTSIZE, null, cv1).toInt()
+            if (r==-1)
+            {
+                Toast.makeText(context,"Error!!!",Toast.LENGTH_SHORT).show()
+            }
+            else{
+//                Toast.makeText(context,"Success..",Toast.LENGTH_SHORT).show()
+
+            }
+
+        } catch (e:Exception)
+        {
+            Toast.makeText(context,"Error= $e",Toast.LENGTH_SHORT).show()
+            Log.e(ContentValues.TAG,"Insert Error!!1")
+        }
+    }
+
     fun insertcutsizemaster(cs:CutSize)
     {
         val db = this.writableDatabase
         val cv = ContentValues()
         cv.put(COL_CSM_NAME,cs.pname)
+        cv.put(COL_DATE,cs.date)
         var r: Int
         try {
             r = db.insert(TABLEMASTER_CUTSIZE, null, cv).toInt()
-          //  r1 = db.insert(TABLE_CUTSIZE, null, cv1).toInt()
+            //  r1 = db.insert(TABLE_CUTSIZE, null, cv1).toInt()
             if (r==-1)
             {
                 Toast.makeText(context,"Error!!!",Toast.LENGTH_SHORT).show()
@@ -170,6 +208,7 @@ class DBHandler(var context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         cv1.put(COL_CS_Q,cs.qty)
         cv1.put(COL_CS_CFT,cs.cft)
         cv1.put(COL_CSM_ID,cs.mid)
+        cv1.put(COL_CS_SUBITEM_ID,cs.subid)
         var r: Int
         try {
            // r = db.insert(TABLEMASTER_CUTSIZE, null, cv).toInt()
@@ -179,7 +218,7 @@ class DBHandler(var context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
                 Toast.makeText(context,"Error!!!",Toast.LENGTH_SHORT).show()
             }
             else{
-                Toast.makeText(context,"Success..",Toast.LENGTH_SHORT).show()
+//                Toast.makeText(context,"Success..",Toast.LENGTH_SHORT).show()
             }
 
         } catch (e:Exception)
@@ -205,7 +244,80 @@ class DBHandler(var context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
        // return cursor.getInt(cursor.getColumnIndex(COL_CSM_ID))
         return cursor1.getInt(cursor1.getColumnIndex(COL_CSM_ID))
     }
-    fun getiddetail(id:Int,mCtx: Context):ArrayList<CutSize>{
+    fun getLastSubItemId():Int
+    {
+        val db=writableDatabase
+        /* val q="SELECT MAX($COL_CSM_ID) FROM $TABLEMASTER_CUTSIZE"*/
+        val cursor1 = db.query(
+            TABLEMASTER_CUTSIZE_ITEMS,
+            arrayOf(COL_CS_SUBITEM_ID), null, null, null, null, null)
+        cursor1.moveToLast()
+        // val q="SELECT $COL_CSM_ID FROM $TABLEMASTER_CUTSIZE ORDER BY $COL_CSM_ID DESC LIMIT 1"
+        // val cursor=db.rawQuery(q, null)
+        //  cursor.moveToFirst()
+        // while (!cursor.isAfterLast)
+        //  {
+        //     return cursor.getInt(cursor.getColumnIndex(COL_CSM_ID))
+        //  }
+        // return cursor.getInt(cursor.getColumnIndex(COL_CSM_ID))
+        return cursor1.getInt(cursor1.getColumnIndex(COL_CS_SUBITEM_ID))
+    }
+    fun getRateCutSize(subId: Int):Double
+    {
+        val db=this.writableDatabase
+        val q="SELECT * FROM $TABLEMASTER_CUTSIZE_ITEMS WHERE $COL_CS_SUBITEM_ID=$subId"
+        var rate = 0.0
+        val cursor1 = db.rawQuery(q, null)
+        try {
+            if (cursor1.moveToFirst()){
+                rate = cursor1.getDouble(cursor1.getColumnIndex(COL_RATE))
+            }
+        }finally {
+            cursor1.close()
+        }
+        db.close()
+        return rate
+    }
+
+    fun getCutSizeHeightWidth(subId: Int):CutSizeSubItemModel
+    {
+        val db=this.writableDatabase
+        val q="SELECT * FROM $TABLEMASTER_CUTSIZE_ITEMS WHERE $COL_CS_SUBITEM_ID=$subId"
+        var width = 0.0
+        var height = 0.0
+        var rate = 0.0
+
+        val cursor1 = db.rawQuery(q, null)
+        try {
+            if (cursor1.moveToFirst()){
+                width = cursor1.getDouble(cursor1.getColumnIndex(COL_CS_W))
+                height = cursor1.getDouble(cursor1.getColumnIndex(COL_CS_H))
+                rate = cursor1.getDouble(cursor1.getColumnIndex(COL_RATE))
+            }
+        }finally {
+            cursor1.close()
+        }
+        db.close()
+        return CutSizeSubItemModel(width,height,rate)
+    }
+
+    fun getDateCutSize(mid: Int):String
+    {
+        val db=this.writableDatabase
+        val q="SELECT * FROM $TABLEMASTER_CUTSIZE WHERE $COL_CSM_ID=$mid"
+        var date = ""
+        val cursor1 = db.rawQuery(q, null)
+        try {
+            if (cursor1.moveToFirst()){
+                date = cursor1.getString(cursor1.getColumnIndex(COL_DATE))
+            }
+        }finally {
+            cursor1.close()
+        }
+        db.close()
+        return date
+    }
+    fun getIdDetailOfCutSizeList(id:Int,mCtx: Context):ArrayList<CutSize>{
        // val query="SELECT a.$COL_CSM_NAME,b.$COL_CS_ID,b.$COL_CS_W,b.$COL_CS_CFT FROM $TABLEMASTER_CUTSIZE a,$TABLE_CUTSIZE b where a.$COL_CSM_ID = b.$id"
         val q="SELECT * FROM $TABLE_CUTSIZE WHERE $COL_CSM_ID=$id"
         val db=this.readableDatabase
@@ -226,6 +338,38 @@ class DBHandler(var context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
                 cs.qty = cursor.getInt(cursor.getColumnIndex(COL_CS_Q))
                 cs.cft = cursor.getDouble(cursor.getColumnIndex(COL_CS_CFT))
                 cs.mid = cursor.getInt(cursor.getColumnIndex(COL_CSM_ID))
+                cs.subid = cursor.getInt(cursor.getColumnIndex(COL_CS_SUBITEM_ID))
+                l.add(cs)
+                cursor.moveToNext()
+            }
+        }
+        cursor.close()
+        db.close()
+        return l
+    }
+
+    fun getSubItemIdDetailOfCutSizeList(subId:Int,mCtx: Context):ArrayList<CutSize>{
+        // val query="SELECT a.$COL_CSM_NAME,b.$COL_CS_ID,b.$COL_CS_W,b.$COL_CS_CFT FROM $TABLEMASTER_CUTSIZE a,$TABLE_CUTSIZE b where a.$COL_CSM_ID = b.$id"
+        val q="SELECT * FROM $TABLE_CUTSIZE WHERE $COL_CS_SUBITEM_ID=$subId"
+        val db=this.readableDatabase
+        val cursor=db.rawQuery(q,null)
+        val l=ArrayList<CutSize>()
+        if (cursor.count==0)
+        {
+
+        }
+        else {
+            cursor.moveToFirst()
+            while (!cursor.isAfterLast) {
+                val cs = CutSize()
+                cs.id = cursor.getInt(cursor.getColumnIndex(COL_CS_ID))
+                cs.width = cursor.getDouble(cursor.getColumnIndex(COL_CS_W))
+                cs.height = cursor.getDouble(cursor.getColumnIndex(COL_CS_H))
+                cs.length = cursor.getDouble(cursor.getColumnIndex(COL_CS_L))
+                cs.qty = cursor.getInt(cursor.getColumnIndex(COL_CS_Q))
+                cs.cft = cursor.getDouble(cursor.getColumnIndex(COL_CS_CFT))
+                cs.mid = cursor.getInt(cursor.getColumnIndex(COL_CSM_ID))
+                cs.subid = cursor.getInt(cursor.getColumnIndex(COL_CS_SUBITEM_ID))
                 l.add(cs)
                 cursor.moveToNext()
             }
@@ -1194,6 +1338,42 @@ class DBHandler(var context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
     fun getDatabaseVersion(): Int {
         return DATABASE_VERSION
     }
+    fun deleteCutSizeSubItemId(id:Int):Boolean
+    {
+        val q="DELETE FROM $TABLEMASTER_CUTSIZE_ITEMS WHERE $COL_CS_SUBITEM_ID= $id"
+        var db = this.writableDatabase
+        var result:Boolean=false
+        try {
+
+            val cursor=db.execSQL(q)
+            result=true
+        }
+        catch (e:Exception)
+        {
+            Log.e(ContentValues.TAG,"Error Deleting")
+        }
+        db.close()
+        return result
+    }
+
+    fun deleteCutSizeSubList(subId:Int):Boolean
+    {
+        val q="DELETE FROM $TABLE_CUTSIZE WHERE $COL_CS_SUBITEM_ID= $subId"
+        var db = this.writableDatabase
+        var result:Boolean=false
+        try {
+
+            val cursor=db.execSQL(q)
+            result=true
+        }
+        catch (e:Exception)
+        {
+            Log.e(ContentValues.TAG,"Eroor Deleting")
+        }
+        db.close()
+        return result
+    }
+
     fun deletecsdetail(id:Int):Boolean
     {
         val q="DELETE FROM $TABLE_CUTSIZE WHERE $COL_CS_ID= $id"
@@ -1256,6 +1436,115 @@ class DBHandler(var context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         }
         return result
     }
+
+    fun editCutSizeRate(subId: Int,rate:Double):Boolean
+    {
+        val db = this.writableDatabase
+        val cv = ContentValues()
+        var result=false
+        cv.put(COL_RATE, rate)
+        try {
+            var r=db.update(TABLEMASTER_CUTSIZE_ITEMS, cv, "$COL_CS_SUBITEM_ID=?", arrayOf(subId.toString()))
+            if(r==1)
+            {
+                Toast.makeText(context,"Update Successfully",Toast.LENGTH_SHORT).show()
+                result=true
+            }
+            else{
+                Toast.makeText(context,"Error",Toast.LENGTH_SHORT).show()
+            }
+
+        }
+        catch (e:Exception)
+        {
+            Log.e(ContentValues.TAG,"Update Error!!")
+            result=false
+        }
+        return result
+    }
+
+    fun editCutSizeHeightWidth(subId: Int,cutSizeSubItemModel: CutSizeSubItemModel):Boolean
+    {
+        val db = this.writableDatabase
+        val cv = ContentValues()
+        var result=false
+        cv.put(COL_CS_H, cutSizeSubItemModel.height)
+        cv.put(COL_CS_W, cutSizeSubItemModel.width)
+        try {
+            var r=db.update(TABLEMASTER_CUTSIZE_ITEMS, cv, "$COL_CS_SUBITEM_ID=?", arrayOf(subId.toString()))
+            if(r==1)
+            {
+                Toast.makeText(context,"Update Successfully",Toast.LENGTH_SHORT).show()
+                result=true
+            }
+            else{
+//                Toast.makeText(context,"Error",Toast.LENGTH_SHORT).show()
+            }
+
+        }
+        catch (e:Exception)
+        {
+            Log.e(ContentValues.TAG,"Update Error!!")
+            result=false
+        }
+        return result
+    }
+
+    fun editCutSizeHeightWidthCUTSIZETABLE(width:Double,height: Double,subId: Int):Boolean
+    {
+        App.showLog("DB","SubId $subId")
+        val db = this.writableDatabase
+        val cv = ContentValues()
+        var result=false
+        cv.put(COL_CS_H, height)
+        cv.put(COL_CS_W, width)
+        try {
+            val r=db.update(TABLE_CUTSIZE, cv, "$COL_CS_SUBITEM_ID=?", arrayOf(subId.toString()))
+            if(r==1)
+            {
+                Toast.makeText(context,"Update Successfully",Toast.LENGTH_SHORT).show()
+                result=true
+            }
+            else{
+//                Toast.makeText(context,"Error sdfadsf",Toast.LENGTH_SHORT).show()
+            }
+
+        }
+        catch (e:Exception)
+        {
+           App.showLog(ContentValues.TAG,"Update Error!!")
+            result=false
+        }
+        return result
+    }
+
+    fun editCutSizeCFTCUTSIZETABLE(cft:Double,id: Int):Boolean
+    {
+        App.showLog("DB","SubId $id")
+        val db = this.writableDatabase
+        val cv = ContentValues()
+        var result=false
+        cv.put(COL_CS_CFT, cft)
+        try {
+            val r=db.update(TABLE_CUTSIZE, cv, "$COL_ID=?", arrayOf(id.toString()))
+            if(r==1)
+            {
+                Toast.makeText(context,"Update Successfully",Toast.LENGTH_SHORT).show()
+                result=true
+            }
+            else{
+//                Toast.makeText(context,"Error sdfadsf",Toast.LENGTH_SHORT).show()
+            }
+
+        }
+        catch (e:Exception)
+        {
+            App.showLog(ContentValues.TAG,"Update Error!!")
+            result=false
+        }
+        return result
+    }
+
     fun editpartyname(id:Int,name:String):Boolean
     {
         val db = this.writableDatabase

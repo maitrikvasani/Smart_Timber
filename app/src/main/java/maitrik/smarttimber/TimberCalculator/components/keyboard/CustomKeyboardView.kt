@@ -121,20 +121,12 @@ class CustomKeyboardView(context: Context, attr: AttributeSet) : ExpandableView(
                 if (!isExpanded) {
                     translateLayout()
                 }
-                if (et == et.findViewById<EditText>(R.id.cutSize_etQty) || et == et.findViewById(R.id.row_cutSize_etUQty)){
-//                    Toast.makeText(context, "Hello", Toast.LENGTH_SHORT).show()
-                    ActCutSizeCFT.click = false
-                }else{
-                    ActCutSizeCFT.click = true
-                }
+                ActCutSizeCFT.click =
+                    !(et == et.findViewById<EditText>(R.id.cutSize_etQty) || et == et.findViewById(R.id.row_cutSize_etUQty))
 //                onFocus!!.onFocus(et)
             } else if (!hasFocus && isExpanded) {
-                if (et == et.findViewById<EditText>(R.id.cutSize_etQty) || et == et.findViewById(R.id.row_cutSize_etUQty)){
-//                    Toast.makeText(context, "Hello", Toast.LENGTH_SHORT).show()
-                    ActCutSizeCFT.click = false
-                }else{
-                    ActCutSizeCFT.click = true
-                }
+                ActCutSizeCFT.click =
+                    !(et == et.findViewById<EditText>(R.id.cutSize_etQty) || et == et.findViewById(R.id.row_cutSize_etUQty))
 //                onFocus!!.onFocus(et)
 //                Toast.makeText(context, "Hello 2 ", Toast.LENGTH_SHORT).show()
                 for (editText in keyboards.keys) {

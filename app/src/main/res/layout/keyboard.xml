@@ -8,8 +8,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_margin="5dp"
-        android:background="#A09F9F"
+        android:layout_margin="0dp"
+        android:padding="5dp"
+        android:background="@color/clrSMBG"
         android:orientation="horizontal"
         android:weightSum="1">
 

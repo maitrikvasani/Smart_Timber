@@ -16,6 +16,7 @@
         android:background="@drawable/button_shape"
         android:backgroundTint="@color/colorPrimary"
         android:padding="10dp"
+        android:visibility="gone"
         android:text="Drum CFT"
         android:textColor="#ffffff"
         android:textSize="20sp"
@@ -30,6 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="9dp"
+        android:visibility="gone"
         android:layout_marginTop="11dp"
         android:layout_marginEnd="9dp"
         android:background="@drawable/button_shape"
@@ -62,6 +64,7 @@
         app:layout_constraintTop_toBottomOf="@+id/btn_home_roundlog" />
 
     <Button
+        android:visibility="gone"
         android:id="@+id/btn_home_lagging"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -88,6 +91,7 @@
         android:background="@drawable/button_shape"
         android:backgroundTint="@color/colorPrimary"
         android:padding="10dp"
+        android:visibility="gone"
         android:text="@string/backup_restore"
         android:textColor="#ffffff"
         android:textSize="20sp"
@@ -97,6 +101,7 @@
         app:layout_constraintTop_toBottomOf="@+id/btn_home_lagging" />
 
     <Button
+        android:visibility="gone"
         android:id="@+id/btn_customKeyboard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

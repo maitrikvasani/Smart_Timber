@@ -29,13 +29,14 @@
             android:imeOptions="actionNext"
             android:textSize="20sp" />
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="24dp"
             android:layout_height="match_parent"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="0dp"
             android:text="-"
+            android:gravity="center"
             android:textColor="@color/clrBlack"
-            android:textSize="15sp" />
+            android:textSize="20sp" />
 
         <EditText
             android:id="@+id/row_cutSize_etUQty"

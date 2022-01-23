@@ -119,7 +119,7 @@
                 android:background="@drawable/button_shape"
                 android:backgroundTint="@color/colorPrimary"
                 android:text="CFT"
-                android:textColor="@color/colorwhite"
+                android:textColor="@color/colorWhite"
                 android:textSize="25sp"
                 android:textStyle="bold"
                 android:visibility="gone" />

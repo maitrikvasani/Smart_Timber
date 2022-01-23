@@ -10,24 +10,27 @@ import android.view.ViewGroup
 import android.widget.*
 import kotlinx.android.synthetic.main.cutsizedetaillayout.view.*
 import kotlinx.android.synthetic.main.drumlist_layout.view.*
+import maitrik.smarttimber.Cut_Size.App
 import maitrik.smarttimber.Model.CutSize
 import maitrik.smarttimber.Model.DBHandler
 import maitrik.smarttimber.R
 import java.text.DecimalFormat
 
-class CutsizeDetail(internal var activity: Activity, private var lstcs:ArrayList<CutSize>,var w:TextView, var h:TextView, var tvcft:TextView,var tvcmt:TextView):BaseAdapter() {
+class AdapterEditCutSize(internal var activity: Activity, private var lstcs:ArrayList<CutSize>,var w:TextView, var h:TextView, var tvcft:TextView,var tvcmt:TextView):BaseAdapter() {
 
     private var inflater: LayoutInflater = activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
     override fun getView(p0: Int, p1: View?, p2: ViewGroup?): View {
         val view: View = inflater.inflate(R.layout.cutsizedetaillayout, null)
-       /*var  id=findViewById<TextView>(R.id.tv_id)
-        var  m=findViewById<TextView>(R.id.master)*/
+       var  etLength=view.findViewById<EditText>(R.id.row_cutsize_details_etLength)
+        var  etQty=view.findViewById<EditText>(R.id.row_cutsize_details_etQty)
        /* id.text="${lstcs[p0].id}"
         m.text="${lstcs[p0].mid}"*/
-        w.setText("${lstcs[p0].width}")
-        h.setText("${lstcs[p0].height}")
-//        view.et_csl_length.setText("${lstcs[p0].length}")
-//        view.et_csl_qty.setText("${lstcs[p0].qty}")
+//        w.setText("${lstcs[p0].width}")
+//        h.setText("${lstcs[p0].height}")
+        etLength.setText(App.getFormatData(lstcs[p0].length.toString()))
+//        etLength.setText("${lstcs[p0].length}")
+//        etQty.setText("${lstcs[p0].qty}")
+        etQty.setText(App.getFormatData(lstcs[p0].qty.toString()))
         view.cft.text = "${lstcs[p0].cft}"
         getCutsizeTotalCFT()
         view.csedit.setOnClickListener {

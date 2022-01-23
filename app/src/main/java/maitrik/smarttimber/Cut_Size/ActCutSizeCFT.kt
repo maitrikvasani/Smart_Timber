@@ -13,14 +13,9 @@ import android.preference.PreferenceManager
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
+import android.view.*
+import android.view.inputmethod.EditorInfo
+import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,15 +23,23 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_splash.*
+import kotlinx.android.synthetic.main.cspartynnamelayout.view.*
 import maitrik.smarttimber.Adapter.AdapterCutSize
+import maitrik.smarttimber.BaseActivity
 import maitrik.smarttimber.Model.CutSize
+import maitrik.smarttimber.Model.CutSizeSubItemModel
+import maitrik.smarttimber.Model.DBHandler
 import maitrik.smarttimber.R
 import maitrik.smarttimber.TimberCalculator.components.keyboard.CustomKeyboardView
 import maitrik.smarttimber.TimberCalculator.components.keyboard.OnNextClickListener
+import java.text.DateFormat
 import java.text.DecimalFormat
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.math.sign
 
-class ActCutSizeCFT : AppCompatActivity() {
+class ActCutSizeCFT : BaseActivity() {
 
     lateinit var  sharedPref : SharedPreferences
     lateinit var etWidth : EditText
@@ -53,11 +56,15 @@ class ActCutSizeCFT : AppCompatActivity() {
     lateinit var tvAmount : TextView
     lateinit var ivAdd : ImageView
     lateinit var tvEqual : TextView
+    lateinit var btnEqual : Button
+    var masterId = -1
+    val strTAG = "ActCutSizeCFT"
     var arrItems = ArrayList<CutSize>()
     var TAG = "CUTSIZE"
     var LENGTHDIF = "LENGTHDIFFERENCE"
     var LENGHT = "LENGTH"
     var QTY = "QTY"
+    var RATE = "RATE"
     var HEIGHT = "HEIGHT"
     var WIDTH = "WIDTH"
     var lastFocus = "LastFocus"
@@ -66,13 +73,13 @@ class ActCutSizeCFT : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.act_cut_size_cft)
-//        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-//        delegate.applyDayNight()
+//        setContentView(R.layout.act_cut_size_cft)
+        ViewGroup.inflate(this,R.layout.act_cut_size_cft,base_llSubMainContainer)
+        var db = DBHandler(applicationContext)
         initialize()
         clickEvent()
-
-        arrItems = readData()
+        getIntentData()
+            arrItems = readData()
         for (i in 0 until arrItems.size){
             Log.d("From","QTY ${arrItems[i].width}")
         }
@@ -126,7 +133,7 @@ class ActCutSizeCFT : AppCompatActivity() {
 //        etRate.addTextChangedListener(object : TextWatcher{
 //            override fun afterTextChanged(p0: Editable?) {
 //                if (p0!!.isNotEmpty()){
-//                    tvAmount.text = getTotalAmount(tvCFT.text.toString().toDouble(),p0.toString().toInt()).toString()
+//                    tvAmount.text = getCutSizeAmount(tvCFT.text.toString().toDouble(),p0.toString().toInt()).toString()
 //                }
 //            }
 //
@@ -139,6 +146,15 @@ class ActCutSizeCFT : AppCompatActivity() {
 //            }
 //
 //        })
+    }
+
+    private fun getIntentData() {
+        if (intent != null){
+           masterId =  intent.getIntExtra("MasterId",-1)
+            App.showLog(strTAG,"MasterId : $masterId")
+        }
+
+
     }
 
     private fun editList(p0: CharSequence, type: String) {
@@ -187,6 +203,10 @@ class ActCutSizeCFT : AppCompatActivity() {
 
         etQty.setText(sharedPref.getString(QTY,""))
         etQty.placeCursorEnd()
+
+        etRate.setText(sharedPref.getString(RATE,""))
+        etRate.placeCursorEnd()
+
         val lastFocus =sharedPref.getString(lastFocus,"W")
         if (lastFocus == "W"){
            etWidth.requestFocus()
@@ -221,6 +241,12 @@ class ActCutSizeCFT : AppCompatActivity() {
         keyboard = findViewById(R.id.cutSize_customKeyboardView)
         ivAdd = findViewById(R.id.cutSize_ivAdd)
         tvEqual = findViewById(R.id.cutSize_tvEqual)
+        btnEqual = findViewById(R.id.cutSize_btnEqual)
+        base_ivBack.visibility = View.VISIBLE
+        base_ivSave.visibility = View.VISIBLE
+        base_ivClose.visibility = View.VISIBLE
+        base_tvTitle.visibility = View.VISIBLE
+        base_tvTitle.text = "Cut Size CFT"
 
 
 
@@ -316,10 +342,62 @@ class ActCutSizeCFT : AppCompatActivity() {
             startActivity(intent)
         }
 
-        tvEqual.setOnClickListener {
+        btnEqual.setOnClickListener {
             if (etRate.text.isNotEmpty()){
-            tvAmount.text = getTotalAmount(tvCFT.text.toString().toDouble(),etRate.text.toString().toDouble()).toString()
+            tvAmount.text = getCutSizeAmount(tvCFT.text.toString().toDouble(),etRate.text.toString().toDouble()).toString()
             }
+        }
+
+        etRate.setOnEditorActionListener { v, actionId, event ->
+            if ((event != null && (event.keyCode  == KeyEvent.KEYCODE_ENTER) || (actionId == EditorInfo.IME_ACTION_DONE) )){
+                if (etRate.text.toString().isNotEmpty()){
+                    tvAmount.text = App.getCutSizeAmount(App.getCutSizeTotalCFT(arrItems),etRate.text.toString().toDouble())
+                }else{
+                    etRate.requestFocus()
+                    etRate.error = "Enter Rate!!"
+                }
+            }
+            return@setOnEditorActionListener false
+        }
+
+        base_ivSave.setOnClickListener {
+            savedialog()
+        }
+        base_ivBack.setOnClickListener {
+            onBackPressed()
+        }
+        base_ivClose.setOnClickListener {
+            val builder: AlertDialog.Builder = AlertDialog.Builder(this)
+            builder.setIcon(R.drawable.ic_clear_red_24dp)
+                .setTitle("Clear all the entries ?")
+                .setPositiveButton(
+                    "Yes",
+                    DialogInterface.OnClickListener { dialogInterface, i ->
+                        arrItems.clear()
+                        etWidth.setText("")
+                        etHeigth.setText("")
+                        etLengthDifference.setText("")
+                        etLength.setText("")
+                        etQty.setText("")
+                        etWidth.requestFocus()
+                        val edit = sharedPref.edit()
+                        edit.clear()
+                        edit.apply()
+                        rvItems.layoutManager = LinearLayoutManager(this)
+                        rvItems.adapter = AdapterCutSize(
+                            this,
+                            arrItems,
+                            tvCFT,
+                            tvCMT,
+                            keyboard,
+                            tvNOS
+                        )
+                        getCutsizeTotalCFT()
+                    })
+                .setNegativeButton(
+                    "No",
+                    DialogInterface.OnClickListener { dialogInterface, i -> })
+            builder.show()
         }
     }
 
@@ -381,12 +459,12 @@ class ActCutSizeCFT : AppCompatActivity() {
         tvCMT.text = fm
         tvNOS.text = nos.toString()
         if (etRate.text.isNotEmpty()) {
-            tvAmount.text = getTotalAmount(cft, etRate.text.toString().toDouble())
+            tvAmount.text = getCutSizeAmount(cft, etRate.text.toString().toDouble())
         }
 //        tvAmount.text = fm
     }
 
-    fun getTotalAmount(cft:Double,rate:Double):String{
+    fun getCutSizeAmount(cft:Double,rate:Double):String{
         val formate = DecimalFormat("##,##,###")
         val amount = cft*rate
         return formate.format(amount)
@@ -428,6 +506,9 @@ class ActCutSizeCFT : AppCompatActivity() {
             edit.putString(QTY,etQty.text.toString())
         }
 
+
+            edit.putString(RATE,etRate.text.toString())
+
         if (etWidth.isFocused){
             edit.putString(lastFocus,"W")
         }
@@ -453,8 +534,8 @@ class ActCutSizeCFT : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item!!.itemId) {
             R.id.cssave -> {
-//                savedialog()
-                //  Toast.makeText(this,"Save",Toast.LENGTH_SHORT).show()
+                savedialog()
+                  Toast.makeText(this,"Save", Toast.LENGTH_SHORT).show()
             }
             R.id.csclr -> {
                 val builder: AlertDialog.Builder = AlertDialog.Builder(this)
@@ -499,6 +580,106 @@ class ActCutSizeCFT : AppCompatActivity() {
 //        layoutManager.reverseLayout = true
         layoutManager.stackFromEnd = true
         rv.layoutManager = layoutManager
+    }
+
+    fun savedialog() {
+        if (tvCFT.text == "") {
+            Toast.makeText(this, "Please Calculate CFT!!!", Toast.LENGTH_SHORT).show()
+        } else if (masterId != -1){
+            val db = DBHandler(applicationContext)
+            var cutSizeSubItemModel = CutSizeSubItemModel(etWidth.text.toString().toDouble(),etHeigth.text.toString().toDouble(),0.0)
+            if (etRate.text.toString().isEmpty()){
+                db.insertCutSizeMasterItems(masterId,0.0,cutSizeSubItemModel)
+            }else{
+                db.insertCutSizeMasterItems(masterId,etRate.text.toString().toDouble(),cutSizeSubItemModel)
+            }
+
+            val lastSubId = db.getLastSubItemId()
+            App.showLog(strTAG,"SubItemID : $lastSubId")
+            insertcutsizecft(masterId,lastSubId)
+            finish()
+        }else {
+            val builder: AlertDialog.Builder = AlertDialog.Builder(this)
+            val inflater: LayoutInflater = layoutInflater
+            val view: View = inflater.inflate(R.layout.cspartynnamelayout, null)
+            var name = view.et_cs_name
+            builder.setView(view)
+                .setTitle("Save Record")
+                .setIcon(R.drawable.ic_save_white_24dp)
+                .setPositiveButton("SAVE") { _, _ ->
+                    if (name.text.toString().isEmpty()) {
+                        name.error = "Enter Name"
+                        name.requestFocus()
+                        Toast.makeText(this, "Please Enter Name!!", Toast.LENGTH_SHORT).show()
+                    } else {
+                        insertcutsizemaster(name.text.toString())
+                        val db = DBHandler(applicationContext)
+                        val lastid = getlastid()
+                        var cutSizeSubItemModel = CutSizeSubItemModel(etWidth.text.toString().toDouble(),etHeigth.text.toString().toDouble(),0.0)
+                        if (etRate.text.toString().isEmpty()){
+                            db.insertCutSizeMasterItems(lastid,0.0,cutSizeSubItemModel)
+                        }else{
+                            App.showLog("mmm","rate ${etRate.text.toString()}")
+                            db.insertCutSizeMasterItems(lastid,etRate.text.toString().toDouble(),cutSizeSubItemModel)
+                        }
+
+                        var lastSubId = db.getLastSubItemId()
+                        App.showLog(strTAG,"SubItemID : $lastSubId")
+                        insertcutsizecft(lastid,lastSubId)
+                        val intent= Intent(this, ActSavedCutSize::class.java)
+                        intent.putExtra("mid",lastid)
+                        intent.putExtra("name",name.text.toString())
+//                        activity.startActivity(intent)
+//                        var intent = Intent(this, CutSizeList::class.java)
+                        startActivity(intent)
+                    }
+                }
+                .setNegativeButton(
+                    "NO"
+                ) { _, _ ->
+
+                }
+            val dialog = builder.create()
+            dialog.show()
+        }
+    }
+
+    fun insertcutsizemaster(name: String) {
+        val context = this
+        val db = DBHandler(context)
+        val date = Calendar.getInstance().time
+        val df = SimpleDateFormat("dd-MM-yyyy")
+        val formatDate = df.format(date)
+        App.showLog(strTAG,"Date : $formatDate")
+        val cutSize = CutSize(name,formatDate)
+        db.insertcutsizemaster(cutSize)
+    }
+
+    fun getlastid(): Int {
+        val context = this
+        val db = DBHandler(context)
+        val i = db.getlastid()
+//        Toast.makeText(context, "$i", Toast.LENGTH_SHORT).show()
+        return i
+    }
+
+    fun insertcutsizecft(masterId:Int,lastSubId:Int) {
+        val context = this
+        App.showLog(strTAG,"SubItem id :$lastSubId")
+        val db = DBHandler(context)
+//        val lastid = getlastid()
+        for (i in 0..arrItems.size - 1) {
+            val cs = CutSize(
+                arrItems[i].width,
+                arrItems[i].height,
+                arrItems[i].length,
+                arrItems[i].qty,
+                arrItems[i].cft,
+                masterId,
+                lastSubId
+            )
+            db.insertcutsize(cs)
+        }
     }
 
 }

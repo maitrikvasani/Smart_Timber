@@ -15,16 +15,19 @@
             android:layout_weight="1" />
 
         <EditText
-
+            android:id="@+id/row_cutsize_details_etLength"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="end"
             android:hint="Height"
+            android:focusable="false"
+            android:clickable="false"
+            android:editable="false"
             android:imeOptions="actionNext"
             android:inputType="numberDecimal"
             android:selectAllOnFocus="true"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -36,15 +39,18 @@
             android:textSize="30sp" />
 
         <EditText
-
+            android:id="@+id/row_cutsize_details_etQty"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="Height"
+            android:focusable="false"
+            android:clickable="false"
+            android:editable="false"
             android:imeOptions="actionNext"
             android:inputType="number"
             android:selectAllOnFocus="true"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/cft"

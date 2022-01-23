@@ -47,6 +47,7 @@
     <string name="save">Save</string>
     <string name="cft">CFT</string>
     <string name="custom_keyboard">Custom Keyboard</string>
+    <string name="strLengthDifference"><font size="13">"Length Difference</font></string>
 
 
     <string name="systemKeyboardLabel">System Keyboards</string>

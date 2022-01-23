@@ -4,14 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="5dp"
     android:orientation="vertical"
     tools:context=".Cut_Size.CutSizeList">
 <ListView
+    android:visibility="gone"
+    android:padding="10dp"
+    android:clipToPadding="false"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_weight="80"
     android:divider="@null"
     android:id="@+id/lv_cs"/>
+    <TextView
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:id="@+id/lv_tvNoDataFound"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="No Data Found"/>
 
 </LinearLayout>

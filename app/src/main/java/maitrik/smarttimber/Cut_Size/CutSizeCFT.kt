@@ -21,6 +21,7 @@ import kotlinx.android.synthetic.main.cspartynnamelayout.view.*
 import maitrik.smarttimber.Adapter.AdapterCutSize
 import maitrik.smarttimber.Adapter.AdapterForCutSize
 import maitrik.smarttimber.Model.CutSize
+import maitrik.smarttimber.Model.CutSizeSubItemModel
 import maitrik.smarttimber.Model.DBHandler
 import maitrik.smarttimber.R
 import maitrik.smarttimber.TimberCalculator.components.keyboard.CustomKeyboardView
@@ -31,6 +32,9 @@ import maitrik.smarttimber.TimberCalculator.components.keyboard.controllers.OnCl
 import java.lang.reflect.InvocationTargetException
 import java.lang.reflect.Method
 import java.text.DecimalFormat
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class CutSizeCFT : AppCompatActivity(), OnNextClickListener {
@@ -312,7 +316,10 @@ class CutSizeCFT : AppCompatActivity(), OnNextClickListener {
     fun insertcutsizemaster(name: String) {
         val context = this
         val db = DBHandler(context)
-        val cutSize = CutSize(name)
+        val date = Calendar.getInstance().time
+        val df = SimpleDateFormat("dd-mm-yyyy")
+        val formatDate = df.format(date)
+        val cutSize = CutSize(name,formatDate)
         db.insertcutsizemaster(cutSize)
     }
 
@@ -328,6 +335,9 @@ class CutSizeCFT : AppCompatActivity(), OnNextClickListener {
         val context = this
         val db = DBHandler(context)
         val lastid = getlastid()
+//        var cutSizeSubItemModel = CutSizeSubItemModel(wi.text.toString().toDouble(),etHeigth.text.toString().toDouble(),0)
+//        db.insertCutSizeMasterItems(lastid,0)
+        val lastSubId = db.getLastSubItemId()
         for (i in 0..lstcs.size - 1) {
             val cs = CutSize(
                 lstcs[i].width,
@@ -335,7 +345,8 @@ class CutSizeCFT : AppCompatActivity(), OnNextClickListener {
                 lstcs[i].length,
                 lstcs[i].qty,
                 lstcs[i].cft,
-                lastid
+                lastid,
+                lastSubId
             )
             db.insertcutsize(cs)
         }

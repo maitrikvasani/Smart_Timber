@@ -5,7 +5,9 @@ import java.io.Serializable
 class CutSize :Serializable {
     var pname:String=""
     var mid:Int=0
+    var date:String=""
      var id:Int=0
+     var subid:Int=0
      var width:Double=0.0
      var height:Double=0.0
      var length:Double=0.0
@@ -14,6 +16,7 @@ class CutSize :Serializable {
      var cmt:Double?=0.0
 
     constructor()
+
     constructor(width: Double, height: Double, length: Double, qty: Int, cft: Double, cmt: Double) {
         this.width = width
         this.height = height
@@ -24,12 +27,14 @@ class CutSize :Serializable {
     }
 
     constructor(
-        pname: String
+        pname: String,
+        date: String
     ) {
         this.pname = pname
+        this.date = date
     }
 
-    constructor( width: Double, height: Double, length: Double, qty: Int, cft: Double?,mid: Int) {
+    constructor( width: Double, height: Double, length: Double, qty: Int, cft: Double?,mid: Int,subid:Int) {
 
         this.width = width
         this.height = height
@@ -37,6 +42,7 @@ class CutSize :Serializable {
         this.qty = qty
         this.cft = cft
         this.mid = mid
+        this.subid = subid
     }
     constructor(  length: Double, qty: Int, cft: Double?) {
 
@@ -48,8 +54,9 @@ class CutSize :Serializable {
 
 }
 
-data class CutSizeCFTMasterModel(var width: Double,var height: Double,var arrItems:ArrayList<CutSize>)
+data class CutSizeCFTMasterModel(var width: Double,var height: Double,var arrItems:ArrayList<CutSize>,var rate:Double)
 
+data class CutSizeSubItemModel(var width : Double, var height: Double,var rate: Double)
 
 
 class CutSizeMOdel(var id: Int,var width : Double, var height : Double, var arrITems: ArrayList<CutSizeHL>)

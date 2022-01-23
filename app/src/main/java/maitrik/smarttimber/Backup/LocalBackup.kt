@@ -20,13 +20,13 @@ class LocalBackup(activity: Activity) {
 
     //ask to the user a name for the backup and perform it. The backup will be saved to a custom folder.
 
-    fun performBackup(db: DBHandler, outFileName: String, i:Int) {
+    fun performBackup(db: DBHandler, outFileName: String, i:Int ) {
 
         Permissions.Permissions.verifyStoragePermissions(activity)
         /*Permissions.verifyStoragePermissions(activity)**/
 
         val folder = File(
-            Environment.getExternalStorageDirectory().toString() + File.separator + activity.getResources().getString(
+            Environment.DIRECTORY_DOWNLOADS.toString() + File.separator + activity.resources.getString(
                 R.string.app_name
             )+File.separator+"DBBackup"
         )

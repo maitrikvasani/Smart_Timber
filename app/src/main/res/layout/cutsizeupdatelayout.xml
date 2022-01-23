@@ -3,6 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
+        android:layout_marginBottom="10dp"
         android:layout_width="401dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -23,12 +24,11 @@
             android:textSize="20sp" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="24dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
             android:gravity="center"
             android:text="-"
+            android:textColor="@color/clrBlack"
             android:textSize="30sp" />
 
         <TextView
@@ -62,16 +62,15 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="end"
-            android:textColor="#000000"
+            android:textColor="@color/clrBlack"
             android:textSize="20sp" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="24dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
             android:gravity="center"
             android:text="-"
+            android:textColor="@color/clrBlack"
             android:textSize="30sp" />
 
         <TextView
@@ -79,7 +78,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textColor="#000000"
+            android:textColor="@color/clrBlack"
             android:selectAllOnFocus="true"
             android:textSize="20sp" />
         <TextView
@@ -112,11 +111,10 @@
             android:textSize="20sp" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="24dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
             android:gravity="center"
+            android:textColor="@color/clrBlack"
             android:text="-"
             android:textSize="30sp" />
 
@@ -126,7 +124,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="Qty"
-            android:imeOptions="actionNext"
+            android:imeOptions="actionDone"
             android:inputType="number"
             android:selectAllOnFocus="true"
             android:textSize="20sp" />

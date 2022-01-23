@@ -13,9 +13,14 @@
         android:roundIcon="@drawable/stlogofinal"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Cut_Size.ActSavedCutSize"></activity>
+        <activity android:name=".BaseActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Cut_Size.ActSavedCutSize"
+            android:theme="@style/ScreenTheme"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Cut_Size.ActCutSizeCFT"
+            android:theme="@style/ScreenTheme"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
             android:name=".Test.ActKeyBoardTest"
@@ -27,8 +32,10 @@
             android:label="Cut Size CFT"
             android:parentActivityName=".STHome" />
         <activity
-            android:name=".Cut_Size.cutsize_list"
-            android:parentActivityName=".Cut_Size.CutSizeList" />
+            android:name=".Cut_Size.ActCutSizeSubItemList"
+            android:theme="@style/ScreenTheme"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
+            />
         <activity
             android:name=".Cut_Size.CutSizeList"
             android:label="View Saved Data"
@@ -72,7 +79,7 @@
             android:parentActivityName=".Drum.Home" />
         <activity
             android:name=".Splash"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            android:theme="@style/ScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

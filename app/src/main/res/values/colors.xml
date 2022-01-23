@@ -7,11 +7,18 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="clrBlack">#000000</color>
-    <color name="colorwhite">#FFFFFF</color>
+    <color name="colorWhite">#FFFFFF</color>
     <color name="clrLightBlue">#c5cfd8</color>
     <color name="clrDarkLightBlue">#6b849e</color>
     <color name="clrDarkLightBlueText">#5f758f</color>
     <color name="clrLightBlueText">#adddf2</color>
     <color name="clrDivider">#9ea2a6</color>
     <color name="clrDivider1">#b0b5bb</color>
+    <color name="clrSMBG">#e6e6e6</color>
+    <color name="clrDoneTExt">#027cff</color>
+    <color name="clrSmButtonBg">#d1d1d1</color>
+    <color name="clrSmDash">#acacac</color>
+
+<!--  Old keyboard  -->
+    <color name="clrOld">#A09F9F</color>
 </resources>
