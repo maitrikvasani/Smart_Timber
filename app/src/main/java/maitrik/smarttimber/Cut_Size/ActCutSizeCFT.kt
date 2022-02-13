@@ -379,6 +379,7 @@ class ActCutSizeCFT : BaseActivity() {
                         etLengthDifference.setText("")
                         etLength.setText("")
                         etQty.setText("")
+                        etRate.setText("")
                         etWidth.requestFocus()
                         val edit = sharedPref.edit()
                         edit.clear()
